@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Home,
   UserRound,
@@ -54,10 +54,10 @@ const Navbar = () => {
           flex h-11 w-11 shrink-0
           items-center justify-center
           rounded-full
-          bg-[var(--bg-primary)]
+          bg-(--bg-primary)
           text-sm font-extrabold
           tracking-tight
-          text-[var(--text-primary)]
+          text-(--text-primary)
           shadow-lg shadow-black/20
           transition-transform duration-300
           hover:scale-105
@@ -71,7 +71,7 @@ const Navbar = () => {
         className="
           rounded-full
           border border-black/10
-          bg-[var(--text-primary)]/95
+          bg-(--text-primary)/95
           p-1.5
           shadow-2xl shadow-black/20
           backdrop-blur-xl
@@ -98,8 +98,8 @@ const Navbar = () => {
 
                   ${
                     item.contact
-                      ? "contact-link bg-[var(--bg-primary)] text-[var(--text-primary)]"
-                      : "text-[var(--bg-primary)]"
+                      ? "contact-link bg-(--bg-primary) text-(--text-primary)"
+                      : "text-(--bg-primary)"
                   }
                 `}
               >
@@ -127,7 +127,7 @@ const Navbar = () => {
           className="
             flex items-center justify-center
             p-2
-            text-[var(--bg-primary)]
+            text-(--bg-primary)
             transition-transform duration-300
             hover:scale-110
             md:hidden
@@ -164,7 +164,7 @@ const Navbar = () => {
           w-64
           overflow-hidden
           rounded-3xl
-          bg-[var(--text-primary)]/95
+          bg-(--text-primary)/95
           p-2
           shadow-2xl shadow-black/30
           backdrop-blur-xl
@@ -173,7 +173,7 @@ const Navbar = () => {
 
           ${
             menuOpen
-              ? "pointer-events-auto max-h-[500px] translate-y-0 opacity-100"
+              ? "pointer-events-auto max-h-125 translate-y-0 opacity-100"
               : "pointer-events-none max-h-0 -translate-y-2 opacity-0"
           }
         `}
@@ -196,8 +196,8 @@ const Navbar = () => {
 
                   ${
                     item.contact
-                      ? "bg-[var(--bg-primary)] text-[var(--text-primary)]"
-                      : "text-[var(--bg-primary)] hover:bg-[var(--accent-cyan)]"
+                      ? "bg-(--bg-primary) text-(--text-primary)"
+                      : "text-(--bg-primary) hover:bg-(--accent-cyan)"
                   }
                 `}
               >

@@ -1,5 +1,6 @@
 import AuroraBackground from "./components/AuroraBackground";
 import Navbar from "./components/Home/Navbar";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <Navbar />
 
       <main>
+        <HomePage/>
         {/* <Hero />
         <About />
         <Skills />
