@@ -1,0 +1,308 @@
+@import "tailwindcss";
+
+/* ========================================
+   DESIGN TOKENS
+======================================== */
+
+:root {
+  /* Background */
+  --bg-primary: #020617;
+  --bg-secondary: #07111f;
+
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Accents */
+  --accent-blue: #3b82f6;
+  --accent-cyan: #67e8f9;
+  --accent-violet: #a78bfa;
+  --accent-orange: #ff6b35;
+
+  /* UI */
+  --border: rgba(148, 163, 184, 0.18);
+
+  /* Animation */
+  --ease-smooth: cubic-bezier(0.76, 0, 0.24, 1);
+  --transition-fast: 0.3s ease;
+  --transition-smooth: 0.45s var(--ease-smooth);
+}
+
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+/* ---------- Shared nav link ---------- */
+
+.nav-link {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  overflow: hidden;
+  border-radius: 999px;
+
+  transition: color var(--transition-fast);
+}
+
+
+/* ---------- Nav content ---------- */
+
+.nav-icon,
+.nav-text {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ---------- Text roll animation ---------- */
+
+.nav-text {
+  position: relative;
+
+  display: block;
+  height: 20px;
+
+  overflow: hidden;
+}
+
+.text-current,
+.text-hover {
+  display: block;
+
+  line-height: 20px;
+
+  transition: transform var(--transition-smooth);
+}
+
+
+/* Duplicate text starts below */
+
+.text-hover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+
+/* Move current text up */
+
+.nav-link:hover .text-current {
+  transform: translateY(-100%);
+}
+
+
+/* Bring duplicate text up */
+
+.nav-link:hover .text-hover {
+  transform: translateY(-100%);
+}
+
+
+/* ========================================
+   NAV LINK HOVER
+======================================== */
+
+/* Cyan background */
+
+.nav-link:not(.contact-link)::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: var(--accent-cyan);
+  border-radius: inherit;
+
+  transform: translateY(100%);
+
+  transition: transform var(--transition-smooth);
+}
+
+
+/* Reveal cyan */
+
+.nav-link:not(.contact-link):hover::before {
+  transform: translateY(0);
+}
+
+
+/* ========================================
+   CONTACT
+======================================== */
+
+.contact-link {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+
+/* Contact icon + text */
+
+.contact-link .nav-icon,
+.contact-link .nav-text {
+  color: inherit;
+}
+
+
+/* Contact hover background */
+
+.contact-link::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: var(--accent-orange);
+  border-radius: inherit;
+
+  transform: translateY(100%);
+
+  transition: transform var(--transition-smooth);
+}
+
+
+/* Reveal orange */
+
+.contact-link:hover::before {
+  transform: translateY(0);
+}
+
+
+/* Contact hover color */
+
+.contact-link:hover {
+  color: var(--bg-primary);
+}
+
+
+/* ========================================
+   EMAIL PILL
+======================================== */
+
+.email-pill {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  overflow: hidden;
+
+  padding: 12px 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+
+  background: var(--bg-primary);
+  color: var(--text-primary);
+
+  transition: color var(--transition-fast);
+}
+
+
+/* ---------- Email hover background ---------- */
+
+.email-pill::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: var(--accent-cyan);
+  border-radius: inherit;
+
+  transform: translateY(100%);
+
+  transition: transform var(--transition-smooth);
+}
+
+
+.email-pill:hover::before {
+  transform: translateY(0);
+}
+
+
+/* ---------- Email content ---------- */
+
+.email-icon,
+.email-text {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ---------- Email text animation ---------- */
+
+.email-text {
+  position: relative;
+
+  display: block;
+  height: 20px;
+
+  overflow: hidden;
+}
+
+.email-current,
+.email-hover {
+  display: block;
+
+  line-height: 20px;
+  white-space: nowrap;
+
+  transition: transform var(--transition-smooth);
+}
+
+
+/* Duplicate starts below */
+
+.email-hover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+
+/* Move current email up */
+
+.email-pill:hover .email-current {
+  transform: translateY(-100%);
+}
+
+
+/* Bring "Let's Talk" up */
+
+.email-pill:hover .email-hover {
+  transform: translateY(-100%);
+}
+
+
+/* ---------- Email icon ---------- */
+
+.email-icon {
+  transition:
+    transform var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.email-pill:hover .email-icon {
+  color: var(--bg-primary);
+
+  transform: translateX(2px);
+}
+
+
+/* Email hover text */
+
+.email-pill:hover {
+  color: var(--bg-primary);
+}
