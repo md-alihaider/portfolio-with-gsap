@@ -1,5 +1,6 @@
 import AuroraBackground from "./components/AuroraBackground";
 import Navbar from "./components/Home/Navbar";
+import AboutMePage from "./pages/AboutMePage";
 import HomePage from "./pages/HomePage";
 
 const App = () => {
@@ -10,7 +11,8 @@ const App = () => {
       <Navbar />
 
       <main>
-        <HomePage/>
+        <HomePage />
+        <AboutMePage/>
         {/* <Hero />
         <About />
         <Skills />
