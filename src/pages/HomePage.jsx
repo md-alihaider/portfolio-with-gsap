@@ -1,5 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { MoveDown, MoveRight } from "lucide-react";
 import { useRef } from "react";
 
 const HomePage = () => {
@@ -10,7 +11,7 @@ const HomePage = () => {
         y: 30,
         opacity: 0,
         duration: 0.9,
-        delay:0.3,
+        delay: 0.3,
         ease: "power3.out",
       });
 
@@ -21,6 +22,52 @@ const HomePage = () => {
         ease: "power3.out",
         stagger: 0.18,
       });
+
+      gsap.from(".hero-description", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+      gsap.from(".hero-buttons", {
+        y: 25,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+      });
+      gsap.from(".hero-meta", {
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+      gsap.to(".scroll-arrow", {
+        y: 6,
+        duration: 0.8,
+        repeat: -1,
+        yoyo: true,
+        ease: "power2.inOut",
+      });
+
+      const cta = document.querySelector(".hero-cta");
+
+      const handleEnter = () => {
+        gsap.to(".cta-arrow", {
+          x: 5,
+          duration: 0.6,
+          ease: "power2.inOut",
+        });
+      };
+
+      const handleLeave = () => {
+        gsap.to(".cta-arrow", {
+          x: 0,
+          duration: 0.6,
+          ease: "power2.inOut",
+        });
+      };
+
+      cta.addEventListener("mouseenter", handleEnter);
+      cta.addEventListener("mouseleave", handleLeave);
     },
     { scope: container },
   );
@@ -94,6 +141,7 @@ const HomePage = () => {
             <div className="mt-10 flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
               <p
                 className="
+                hero-description
                   max-w-lg
                   text-base
                   leading-relaxed
@@ -106,10 +154,11 @@ const HomePage = () => {
               </p>
 
               {/* Buttons */}
-              <div className="flex flex-wrap gap-3">
+              <div className="hero-buttons flex flex-wrap gap-3">
                 <a
                   href="#projects"
                   className="
+                    hero-cta
                     rounded-full
                     bg-(--text-primary)
                     px-6
@@ -120,33 +169,23 @@ const HomePage = () => {
                     transition-transform
                     duration-300
                     hover:scale-105
+                    flex items-center gap-3 justify-center
+                    
                   "
                 >
-                  View My Work →
+                  View My Work{" "}
+                  <span className="cta-arrow">
+                    <MoveRight size={16} />
+                  </span>
                 </a>
 
                 <a
                   href="/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="
-                    rounded-full
-                    border
-                    border-white/20
-                    bg-white/5
-                    px-6
-                    py-3.5
-                    text-sm
-                    font-medium
-                    text-(--text-primary)
-                    backdrop-blur-sm
-                    transition-all
-                    duration-300
-                    hover:border-white/40
-                    hover:bg-white/10
-                  "
+                  className="resume-btn"
                 >
-                  Download Resume
+                  <span className="resume-btn-text">Download Resume</span>
                 </a>
               </div>
             </div>
@@ -155,6 +194,7 @@ const HomePage = () => {
           {/* Bottom Metadata */}
           <div
             className="
+            hero-meta
               mt-16
               flex
               items-end
@@ -179,6 +219,7 @@ const HomePage = () => {
             <a
               href="#about"
               className="
+              hero-scroll 
                 text-[10px]
                 font-medium
                 uppercase
@@ -187,9 +228,14 @@ const HomePage = () => {
                 transition-colors
                 duration-300
                 hover:text-(--text-primary)
+                flex items-center justify-center gap-4
               "
             >
-              Scroll to explore ↓
+              <span>Scroll to explore</span>
+
+              <span className="scroll-arrow">
+                <MoveDown size={18} />
+              </span>
             </a>
           </div>
         </div>
