@@ -2,6 +2,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { MoveDown, MoveRight } from "lucide-react";
 import { useRef } from "react";
+import { heroData, personalInfo } from "../data/data";
 
 const HomePage = () => {
   const container = useRef(null);
@@ -110,7 +111,7 @@ const HomePage = () => {
                   text-(--text-secondary)
                 "
               >
-                Available for work
+                {personalInfo.availability}
               </span>
             </div>
 
@@ -128,12 +129,13 @@ const HomePage = () => {
                 fontSize: "clamp(3.8rem, 9vw, 9rem)",
               }}
             >
-              <span className="hero-line block">I Build</span>
+              <span className="hero-line block">{heroData.heading.line1}</span>
 
-              <span className="hero-line block">Digital</span>
+              <span className="hero-line block">{heroData.heading.line2}</span>
 
               <span className="hero-line block">
-                Experiences<span className="text-(--accent-orange)">.</span>
+                {heroData.heading.line3}
+                <span className="text-(--accent-orange)">.</span>
               </span>
             </h1>
 
@@ -149,43 +151,47 @@ const HomePage = () => {
                   md:text-lg
                 "
               >
-                Full-stack developer crafting modern, interactive web
-                experiences with clean design and thoughtful interactions.
+                {heroData.description}
               </p>
 
               {/* Buttons */}
               <div className="hero-buttons flex flex-wrap gap-3">
                 <a
-                  href="#projects"
+                  href={heroData.primaryCta.href}
                   className="
-                    hero-cta
-                    rounded-full
-                    bg-(--text-primary)
-                    px-6
-                    py-3.5
-                    text-sm
-                    font-semibold
-                    text-(--bg-primary)
-                    transition-transform
-                    duration-300
-                    hover:scale-105
-                    flex items-center gap-3 justify-center
-                    
-                  "
+                  hero-cta
+                  flex
+                  items-center
+                  justify-center
+                  gap-3
+                  rounded-full
+                  bg-(--text-primary)
+                  px-6
+                  py-3.5
+                  text-sm
+                  font-semibold
+                  text-(--bg-primary)
+                  transition-transform
+                  duration-300
+                  hover:scale-105
+                "
                 >
-                  View My Work{" "}
+                  {heroData.primaryCta.label}
+
                   <span className="cta-arrow">
                     <MoveRight size={16} />
                   </span>
                 </a>
 
                 <a
-                  href="/resume.pdf"
+                  href={heroData.resumeCta.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="resume-btn"
                 >
-                  <span className="resume-btn-text">Download Resume</span>
+                  <span className="resume-btn-text">
+                    {heroData.resumeCta.label}
+                  </span>
                 </a>
               </div>
             </div>
@@ -213,30 +219,33 @@ const HomePage = () => {
                 text-(--text-muted)
               "
             >
-              India · 2026
+              {heroData.location}
             </span>
 
             <a
-              href="#about"
+              href={heroData.scroll.href}
               className="
-              hero-scroll 
-                text-[10px]
-                font-medium
-                uppercase
-                tracking-[0.2em]
-                text-(--text-muted)
-                transition-colors
-                duration-300
-                hover:text-(--text-primary)
-                flex items-center justify-center gap-4
-              "
+              hero-scroll
+              flex
+              items-center
+              justify-center
+              gap-4
+              text-[10px]
+              font-medium
+              uppercase
+              tracking-[0.2em]
+              text-(--text-muted)
+              transition-colors
+              duration-300
+              hover:text-(--text-primary)
+            "
             >
-              <span>Scroll to explore</span>
+              <span>{heroData.scroll.label}</span>
 
               <span className="scroll-arrow">
                 <MoveDown size={18} />
               </span>
-            </a>
+            </a>          
           </div>
         </div>
       </section>

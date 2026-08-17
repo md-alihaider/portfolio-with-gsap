@@ -1,5 +1,5 @@
 // src/data/data.js
-
+import { Home, UserRound, Code2, FolderOpen, Mail } from "lucide-react";
 export const personalInfo = {
   name: "Ali Haider",
   role: "Full-Stack Developer",
@@ -8,9 +8,36 @@ export const personalInfo = {
   email: "alihaiderbgp85@gmail.com",
 };
 
-export const heroData = {
-  availability: "Available for work",
+export const navigation = [
+  {
+    name: "Home",
+    href: "#home",
+    icon: Home,
+  },
+  {
+    name: "About",
+    href: "#about",
+    icon: UserRound,
+  },
+  {
+    name: "Skills",
+    href: "#skills",
+    icon: Code2,
+  },
+  {
+    name: "Projects",
+    href: "#projects",
+    icon: FolderOpen,
+  },
+  {
+    name: "Contact",
+    href: "#contact",
+    icon: Mail,
+    contact: true,
+  },
+];
 
+export const heroData = {
   heading: {
     line1: "I Build",
     line2: "Digital",
@@ -25,14 +52,21 @@ export const heroData = {
     href: "#projects",
   },
 
-  secondaryCta: {
+  resumeCta: {
     label: "Download Resume",
     href: "/resume.pdf",
   },
 
   location: "India · 2026",
-  scrollText: "Scroll to explore",
+
+  scroll: {
+    label: "Scroll to explore",
+    href: "#about",
+  },
 };
+// src/data/data.js
+
+ import aboutImage from "../assets/Aboutme.jpg";
 
 export const aboutData = {
   sectionNumber: "01",
@@ -48,7 +82,7 @@ export const aboutData = {
   },
 
   photo: {
-    src: "/src/assets/Aboutme.jpg",
+    src: aboutImage,
     alt: "Ali Haider",
     name: "Ali Haider",
     role: "Developer / Builder",
@@ -64,7 +98,7 @@ export const aboutData = {
     label: "Education",
     number: "01",
     degree: "BCA",
-    institution: "University Department of Bio-Informatics",
+    institution: "Tilka Manjhi Bhagalpur University",
     duration: "2021 — 2024",
     type: "Bachelor's Degree",
     score: "70.5%",

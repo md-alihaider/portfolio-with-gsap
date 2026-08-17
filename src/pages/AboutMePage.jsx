@@ -1,10 +1,109 @@
-import aboutImage from "../assets/Aboutme.jpg";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+import { aboutData } from "../data/data";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AboutMePage = () => {
-  const technologies = ["React", "Node.js", "GSAP", "TypeScript"];
+  const container = useRef(null);
+  useGSAP(
+    () => {
+      gsap.from(".about-header", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
 
+        scrollTrigger: {
+          trigger: ".about-header",
+          start: "top 85%",
+          once: true,
+        },
+      });
+      gsap.from(".about-heading-line", {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.15,
+
+        scrollTrigger: {
+          trigger: ".about-heading",
+          start: "top 80%",
+          once: true,
+        },
+      });
+      gsap.from(".about-photo", {
+        opacity: 0,
+        scale: 0.94,
+        y: 40,
+        duration: 1,
+        ease: "power3.out",
+
+        scrollTrigger: {
+          trigger: ".about-photo",
+          start: "top 85%",
+          once: true,
+        },
+      });
+      gsap.from(".about-intro", {
+        y: 50,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+
+        scrollTrigger: {
+          trigger: ".about-intro",
+          start: "top 85%",
+          once: true,
+        },
+      });
+      gsap.from(".about-info-card", {
+        y: 50,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.15,
+        ease: "power3.out",
+
+        scrollTrigger: {
+          trigger: ".about-info-card",
+          start: "top 85%",
+          once: true,
+        },
+      });
+      gsap.from(".about-tech-item", {
+        x: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: "power3.out",
+
+        scrollTrigger: {
+          trigger: ".about-technologies",
+          start: "top 85%",
+          once: true,
+        },
+      });
+      gsap.from(".about-building", {
+        y: 40,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+
+        scrollTrigger: {
+          trigger: ".about-building",
+          start: "top 90%",
+          once: true,
+        },
+      });
+    },
+    { scope: container },
+  );
   return (
     <section
+      ref={container}
       id="about"
       className="
         relative
@@ -19,7 +118,7 @@ const AboutMePage = () => {
             SECTION HEADER
         ======================================== */}
 
-        <div className="mb-14 flex items-center gap-3">
+        <div className="about-header mb-14 flex items-center gap-3">
           <span
             className="
               text-xs
@@ -29,7 +128,7 @@ const AboutMePage = () => {
               text-(--accent-cyan)
             "
           >
-            01
+            {aboutData.sectionNumber}
           </span>
 
           <span
@@ -41,7 +140,7 @@ const AboutMePage = () => {
               text-(--text-muted)
             "
           >
-            About
+            {aboutData.sectionTitle}
           </span>
         </div>
 
@@ -59,11 +158,11 @@ const AboutMePage = () => {
               rounded-3xl
               border
               border-white/10
-              bg-white/[0.02]
+              bg-white/2
               p-7
               md:p-10
               lg:col-span-8
-              lg:min-h-[500px]
+              lg:min-h-125
             "
           >
             <div className="flex h-full flex-col justify-between">
@@ -85,24 +184,33 @@ const AboutMePage = () => {
 
               <h2
                 className="
-                  max-w-4xl
-                  text-5xl
-                  font-bold
-                  uppercase
-                  leading-[0.88]
-                  tracking-[-0.06em]
-                  text-(--text-primary)
-                  sm:text-6xl
-                  md:text-7xl
-                  lg:text-[5.5rem]
-                  xl:text-[6rem]
-                "
+                about-heading
+                max-w-4xl
+                text-5xl
+                font-bold
+                uppercase
+                leading-[0.88]
+                tracking-[-0.06em]
+                text-(--text-primary)
+                sm:text-6xl
+                md:text-7xl
+                lg:text-[5.5rem]
+                xl:text-[6rem]
+               "
               >
-                Curious by
-                <span className="block">default.</span>
-                <span className="block">
-                  Builder by{" "}
-                  <span className="text-(--accent-orange)">choice.</span>
+                <span className="about-heading-line block">
+                  {aboutData.statement.line1}
+                </span>
+
+                <span className="about-heading-line block">
+                  {aboutData.statement.line2}
+                </span>
+
+                <span className="about-heading-line block">
+                  {aboutData.statement.line3}{" "}
+                  <span className="text-(--accent-orange)">
+                    {aboutData.statement.highlight}
+                  </span>
                 </span>
               </h2>
             </div>
@@ -119,9 +227,10 @@ const AboutMePage = () => {
 
             <div
               className="
+                about-photo
                 group
                 relative
-                min-h-[280px]
+                min-h-70
                 overflow-hidden
                 rounded-3xl
                 border
@@ -132,8 +241,8 @@ const AboutMePage = () => {
               {/* Image */}
 
               <img
-                src={aboutImage}
-                alt="Ali Haider"
+                src={aboutData.photo.src}
+                alt={aboutData.photo.alt}
                 className="
                   absolute
                   inset-0
@@ -157,7 +266,7 @@ const AboutMePage = () => {
                 className="
                   absolute
                   inset-0
-                  bg-gradient-to-t
+                  bg-linear-to-t
                   from-(--bg-primary)
                   via-(--bg-primary)/20
                   to-transparent
@@ -170,7 +279,7 @@ const AboutMePage = () => {
                 className="
                   absolute
                   inset-0
-                  bg-gradient-to-br
+                  bg-linear-to-br
                   from-(--accent-blue)/10
                   via-transparent
                   to-(--accent-violet)/10
@@ -199,7 +308,7 @@ const AboutMePage = () => {
                       text-(--text-primary)
                     "
                   >
-                    Ali Haider
+                    {aboutData.photo.name}
                   </p>
 
                   <p
@@ -211,7 +320,7 @@ const AboutMePage = () => {
                       text-(--text-secondary)
                     "
                   >
-                    Developer / Builder
+                    {aboutData.photo.role}
                   </p>
                 </div>
 
@@ -221,7 +330,7 @@ const AboutMePage = () => {
                     text-(--text-secondary)
                   "
                 >
-                  01
+                  {aboutData.photo.number}
                 </span>
               </div>
             </div>
@@ -232,14 +341,15 @@ const AboutMePage = () => {
 
             <div
               className="
+                about-intro
                 flex
-                min-h-[200px]
+                min-h-50
                 flex-col
                 justify-between
                 rounded-3xl
                 border
                 border-white/10
-                bg-white/[0.02]
+                bg-white/2
                 p-6
               "
             >
@@ -251,7 +361,7 @@ const AboutMePage = () => {
                   text-(--text-muted)
                 "
               >
-                Who I am
+                {aboutData.intro.label}
               </span>
 
               <p
@@ -263,9 +373,7 @@ const AboutMePage = () => {
                   md:text-lg
                 "
               >
-                I'm Ali, a full-stack developer focused on creating modern,
-                interactive digital experiences with clean design and thoughtful
-                interactions.
+                {aboutData.intro.text}
               </p>
             </div>
           </div>
@@ -276,10 +384,12 @@ const AboutMePage = () => {
 
           <div
             className="
+              about-info-card
+              about-technologies
               rounded-3xl
               border
               border-white/10
-              bg-white/[0.02]
+              bg-white/2
               p-6
               md:p-8
               lg:col-span-4
@@ -297,7 +407,7 @@ const AboutMePage = () => {
                     text-(--text-muted)
                   "
                 >
-                  Education
+                  {aboutData.education.label}
                 </span>
 
                 <span
@@ -306,7 +416,7 @@ const AboutMePage = () => {
                     text-(--accent-cyan)
                   "
                 >
-                  01
+                  {aboutData.education.number}
                 </span>
               </div>
 
@@ -321,21 +431,19 @@ const AboutMePage = () => {
                     text-(--text-primary)
                   "
                 >
-                  BCA
+                  {aboutData.education.degree}
                 </p>
 
                 <p
                   className="
                     mt-2
-                    max-w-[220px]
+                    max-w-55
                     text-sm
                     leading-relaxed
                     text-(--text-secondary)
                   "
                 >
-                  University Department
-                  <br />
-                  of Bio-Informatics
+                  {aboutData.education.institution}
                 </p>
 
                 <p
@@ -345,7 +453,7 @@ const AboutMePage = () => {
                     text-(--text-muted)
                   "
                 >
-                  2021 — 2024
+                  {aboutData.education.duration}
                 </p>
 
                 {/* Bottom Information */}
@@ -367,7 +475,7 @@ const AboutMePage = () => {
                       text-(--text-muted)
                     "
                   >
-                    Bachelor's Degree
+                    {aboutData.education.type}
                   </span>
 
                   <span
@@ -377,7 +485,7 @@ const AboutMePage = () => {
                       text-(--text-primary)
                     "
                   >
-                    70.5%
+                    {aboutData.education.score}
                   </span>
                 </div>
               </div>
@@ -390,10 +498,11 @@ const AboutMePage = () => {
 
           <div
             className="
+            about-info-card
               rounded-3xl
               border
               border-white/10
-              bg-white/[0.02]
+              bg-white/2
               p-6
               md:p-8
               lg:col-span-8
@@ -410,7 +519,7 @@ const AboutMePage = () => {
                   text-(--text-muted)
                 "
               >
-                Currently Exploring
+                {aboutData.technologies.label}
               </span>
 
               <span
@@ -432,17 +541,18 @@ const AboutMePage = () => {
                     bg-green-400
                   "
                 />
-                Learning
+                {aboutData.technologies.status}
               </span>
             </div>
 
             {/* Technology List */}
 
             <div className="mt-8 grid sm:grid-cols-2">
-              {technologies.map((technology, index) => (
+              {aboutData.technologies.items.map((technology, index) => (
                 <div
                   key={technology}
                   className="
+                    about-tech-item
                     group
                     flex
                     items-center
@@ -496,6 +606,7 @@ const AboutMePage = () => {
 
           <div
             className="
+              about-building
               flex
               flex-col
               gap-6
@@ -520,7 +631,7 @@ const AboutMePage = () => {
                   text-(--text-muted)
                 "
               >
-                Currently Building
+                {aboutData.building.label}
               </p>
 
               <p
@@ -533,7 +644,7 @@ const AboutMePage = () => {
                   md:text-3xl
                 "
               >
-                Full-stack digital experiences.
+                {aboutData.building.title}
               </p>
             </div>
 
@@ -556,7 +667,7 @@ const AboutMePage = () => {
                   bg-green-400
                 "
               />
-              Open to opportunities
+              {aboutData.building.status}
             </div>
           </div>
         </div>
