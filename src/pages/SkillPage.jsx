@@ -1,5 +1,10 @@
 import { skillsData } from "../data/data";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 import { Boxes, Database } from "lucide-react";
 import {
   FaReact,
@@ -98,6 +103,10 @@ const SkillCard = ({ skill, skillIcons }) => {
   );
 };
 const SkillPage = () => {
+  const container = useRef(null);
+  useGSAP(() => {}, {
+    scope: container,
+  });
   const skillIcons = {
     html: FaHtml5,
     css: FaCss3Alt,
@@ -134,7 +143,7 @@ const SkillPage = () => {
   return (
     <section
       id="skills"
-      className="rounded-t-[3rem] bg-(--bg-secondary) px-6 py-24 text-(--text-primary) md:px-10 lg:px-16"
+      className="relative z-10 rounded-t-[3rem] bg-(--bg-secondary) px-6 py-24 text-(--text-primary) md:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
