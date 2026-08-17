@@ -1,9 +1,8 @@
 import { skillsData } from "../data/data";
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
+
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 
 import { Boxes, Database } from "lucide-react";
 import {
@@ -104,9 +103,52 @@ const SkillCard = ({ skill, skillIcons }) => {
 };
 const SkillPage = () => {
   const container = useRef(null);
-  useGSAP(() => {}, {
-    scope: container,
-  });
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+
+      tl.from(".skills-label", {
+        y: 20,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      })
+        .from(
+          ".skills-heading",
+          {
+            y: 35,
+            opacity: 0,
+            duration: 0.7,
+            ease: "power3.out",
+          },
+          "-=0.25",
+        )
+        .from(
+          ".skills-description",
+          {
+            y: 20,
+            opacity: 0,
+            duration: 0.5,
+            ease: "power3.out",
+          },
+          "-=0.3",
+        )
+        .from(
+          ".skill-category-header",
+          {
+            y: 25,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.15,
+            ease: "power3.out",
+          },
+          "-=0.2",
+        );
+    },
+    {
+      scope: container,
+    },
+  );
   const skillIcons = {
     html: FaHtml5,
     css: FaCss3Alt,
@@ -142,22 +184,23 @@ const SkillPage = () => {
   };
   return (
     <section
+      ref={container}
       id="skills"
       className="relative z-10 rounded-t-[3rem] bg-(--bg-secondary) px-6 py-24 text-(--text-primary) md:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="mb-16">
-          <span className="text-sm tracking-[0.2em] text-(--accent-cyan)">
+          <span className="skills-label text-sm tracking-[0.2em] text-(--accent-cyan)">
             {skillsData.sectionLabel}
           </span>
 
           <div className="mt-5 max-w-3xl">
-            <h2 className="text-4xl font-medium tracking-tight md:text-6xl lg:text-7xl">
+            <h2 className="skills-heading text-4xl font-medium tracking-tight md:text-6xl lg:text-7xl">
               {skillsData.heading}
             </h2>
 
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-(--text-secondary) md:text-lg">
+            <p className="skills-description mt-6 max-w-xl text-base leading-relaxed text-(--text-secondary) md:text-lg">
               {skillsData.description}
             </p>
           </div>
@@ -166,9 +209,9 @@ const SkillPage = () => {
         {/* Skill Categories */}
         <div className="space-y-16">
           {skillsData.categories.map((category) => (
-            <div key={category.id}>
+            <div key={category.id} className="skill-category">
               {/* Category Header */}
-              <div className="mb-6 flex items-end justify-between border-b border-(--border) pb-4">
+              <div className="skill-category-header mb-6 flex items-end justify-between border-b border-(--border) pb-4">
                 <div>
                   <span className="text-xs tracking-[0.2em] text-(--text-muted)">
                     {category.number}
@@ -185,7 +228,7 @@ const SkillPage = () => {
               </div>
 
               {/* Technology Pills */}
-              <div className="flex flex-wrap gap-3">
+              <div className="skill-items flex flex-wrap gap-3">
                 {category.skills.map((skill) => (
                   <SkillCard
                     key={skill.name}

@@ -29,6 +29,10 @@
   --transition-smooth: 0.45s var(--ease-smooth);
 }
 
+::selection {
+  background: var(--accent-cyan);
+  color: var(--bg-primary);
+}
 
 /* ========================================
    NAVBAR
