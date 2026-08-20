@@ -64,7 +64,7 @@ const ProjectPage = () => {
     <section
       ref={container}
       id="projects"
-      className="bg-(--bg-primary) px-6 py-32 text-(--text-primary) md:px-10 lg:px-16"
+      className="relative rounded-b-[3rem] bg-(--bg-primary) px-6 py-32 text-(--text-primary) md:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
@@ -185,6 +185,7 @@ const ProjectPage = () => {
           })}
         </div>
       </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 h-64 w-full bg-linear-to-b from-(--bg-primary) to-transparent" />
     </section>
   );
 };

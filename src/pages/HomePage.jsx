@@ -2,57 +2,151 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { MoveDown, MoveRight } from "lucide-react";
 import { useRef } from "react";
+
 import { heroData, personalInfo } from "../data/data";
 
 const HomePage = () => {
   const container = useRef(null);
+
   useGSAP(
     () => {
-      gsap.from(".availability", {
-        y: 30,
-        opacity: 0,
-        duration: 0.9,
-        delay: 0.3,
-        ease: "power3.out",
-      });
+      const root = container.current;
 
-      gsap.from(".hero-line", {
-        y: 70,
-        opacity: 0,
-        duration: 1.1,
-        ease: "power3.out",
-        stagger: 0.18,
-      });
+      if (!root) return;
 
-      gsap.from(".hero-description", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-      gsap.from(".hero-buttons", {
+      const availability = root.querySelector(".availability");
+      const heroLines = root.querySelectorAll(".hero-line");
+      const description = root.querySelector(".hero-description");
+      const buttons = root.querySelector(".hero-buttons");
+      const meta = root.querySelector(".hero-meta");
+      const scrollArrow = root.querySelector(".scroll-arrow");
+      const cta = root.querySelector(".hero-cta");
+      const ctaArrow = root.querySelector(".cta-arrow");
+
+      /*
+       * --------------------------------
+       * Initial Hero State
+       * --------------------------------
+       *
+       * Hide everything immediately while
+       * the loading screen is visible.
+       */
+      gsap.set(availability, {
         y: 25,
         opacity: 0,
-        duration: 0.7,
-        ease: "power3.out",
       });
-      gsap.from(".hero-meta", {
+
+      gsap.set(heroLines, {
+        y: 50,
         opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      });
-      gsap.to(".scroll-arrow", {
-        y: 6,
-        duration: 0.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut",
       });
 
-      const cta = document.querySelector(".hero-cta");
+      gsap.set(description, {
+        y: 25,
+        opacity: 0,
+      });
 
+      gsap.set(buttons, {
+        y: 25,
+        opacity: 0,
+      });
+
+      gsap.set(meta, {
+        opacity: 0,
+      });
+
+      /*
+       * --------------------------------
+       * Hero Entrance Animation
+       * --------------------------------
+       */
+      const playHeroAnimation = () => {
+        const tl = gsap.timeline();
+
+        // Availability
+        tl.to(availability, {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.out",
+        })
+
+          // Heading
+          .to(
+            heroLines,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.9,
+              stagger: 0.08,
+              ease: "power3.out",
+            },
+            "-=0.45",
+          )
+
+          // Description + buttons together
+          .to(
+            [description, buttons],
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: "power3.out",
+              stagger: 0.05,
+            },
+            "-=0.55",
+          )
+
+          // Bottom metadata
+          .to(
+            meta,
+            {
+              opacity: 1,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.35",
+          );
+      };
+
+      /*
+       * --------------------------------
+       * Loader → Hero
+       * --------------------------------
+       */
+      const handleLoaderComplete = () => {
+        playHeroAnimation();
+      };
+
+      window.addEventListener(
+        "loaderComplete",
+        handleLoaderComplete,
+      );
+
+      /*
+       * --------------------------------
+       * Scroll Arrow
+       * --------------------------------
+       */
+      if (scrollArrow) {
+        gsap.to(scrollArrow, {
+          y: 6,
+          duration: 0.8,
+          repeat: -1,
+          yoyo: true,
+          ease: "power2.inOut",
+        });
+      }
+
+      /*
+       * --------------------------------
+       * CTA Hover
+       * --------------------------------
+       */
       const handleEnter = () => {
-        gsap.to(".cta-arrow", {
+        if (!ctaArrow) return;
+
+        gsap.to(ctaArrow, {
           x: 5,
           duration: 0.6,
           ease: "power2.inOut",
@@ -60,18 +154,42 @@ const HomePage = () => {
       };
 
       const handleLeave = () => {
-        gsap.to(".cta-arrow", {
+        if (!ctaArrow) return;
+
+        gsap.to(ctaArrow, {
           x: 0,
           duration: 0.6,
           ease: "power2.inOut",
         });
       };
 
-      cta.addEventListener("mouseenter", handleEnter);
-      cta.addEventListener("mouseleave", handleLeave);
+      if (cta) {
+        cta.addEventListener("mouseenter", handleEnter);
+        cta.addEventListener("mouseleave", handleLeave);
+      }
+
+      /*
+       * --------------------------------
+       * Cleanup
+       * --------------------------------
+       */
+      return () => {
+        window.removeEventListener(
+          "loaderComplete",
+          handleLoaderComplete,
+        );
+
+        if (cta) {
+          cta.removeEventListener("mouseenter", handleEnter);
+          cta.removeEventListener("mouseleave", handleLeave);
+        }
+      };
     },
-    { scope: container },
+    {
+      scope: container,
+    }
   );
+
   return (
     <main>
       <section
@@ -99,7 +217,7 @@ const HomePage = () => {
           {/* Hero Content */}
           <div className="flex flex-col">
             {/* Availability */}
-            <div className="mb-8 flex items-center gap-2 availability">
+            <div className="availability mb-8 flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-green-400" />
 
               <span
@@ -129,9 +247,13 @@ const HomePage = () => {
                 fontSize: "clamp(3.8rem, 9vw, 9rem)",
               }}
             >
-              <span className="hero-line block">{heroData.heading.line1}</span>
+              <span className="hero-line block">
+                {heroData.heading.line1}
+              </span>
 
-              <span className="hero-line block">{heroData.heading.line2}</span>
+              <span className="hero-line block">
+                {heroData.heading.line2}
+              </span>
 
               <span className="hero-line block">
                 {heroData.heading.line3}
@@ -143,7 +265,7 @@ const HomePage = () => {
             <div className="mt-10 flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
               <p
                 className="
-                hero-description
+                  hero-description
                   max-w-lg
                   text-base
                   leading-relaxed
@@ -159,22 +281,22 @@ const HomePage = () => {
                 <a
                   href={heroData.primaryCta.href}
                   className="
-                  hero-cta
-                  flex
-                  items-center
-                  justify-center
-                  gap-3
-                  rounded-full
-                  bg-(--text-primary)
-                  px-6
-                  py-3.5
-                  text-sm
-                  font-semibold
-                  text-(--bg-primary)
-                  transition-transform
-                  duration-300
-                  hover:scale-105
-                "
+                    hero-cta
+                    flex
+                    items-center
+                    justify-center
+                    gap-3
+                    rounded-full
+                    bg-(--text-primary)
+                    px-6
+                    py-3.5
+                    text-sm
+                    font-semibold
+                    text-(--bg-primary)
+                    transition-transform
+                    duration-300
+                    hover:scale-105
+                  "
                 >
                   {heroData.primaryCta.label}
 
@@ -200,7 +322,7 @@ const HomePage = () => {
           {/* Bottom Metadata */}
           <div
             className="
-            hero-meta
+              hero-meta
               mt-16
               flex
               items-end
@@ -225,27 +347,27 @@ const HomePage = () => {
             <a
               href={heroData.scroll.href}
               className="
-              hero-scroll
-              flex
-              items-center
-              justify-center
-              gap-4
-              text-[10px]
-              font-medium
-              uppercase
-              tracking-[0.2em]
-              text-(--text-muted)
-              transition-colors
-              duration-300
-              hover:text-(--text-primary)
-            "
+                hero-scroll
+                flex
+                items-center
+                justify-center
+                gap-4
+                text-[10px]
+                font-medium
+                uppercase
+                tracking-[0.2em]
+                text-(--text-muted)
+                transition-colors
+                duration-300
+                hover:text-(--text-primary)
+              "
             >
               <span>{heroData.scroll.label}</span>
 
               <span className="scroll-arrow">
                 <MoveDown size={18} />
               </span>
-            </a>          
+            </a>
           </div>
         </div>
       </section>

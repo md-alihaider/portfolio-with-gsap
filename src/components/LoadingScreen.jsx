@@ -40,6 +40,8 @@ const LoadingScreen = () => {
         yPercent: -100,
         duration: 0.8,
         ease: "power4.inOut",
+      }).call(() => {
+        window.dispatchEvent(new Event("loaderComplete"));
       });
     },
     {
@@ -50,7 +52,7 @@ const LoadingScreen = () => {
   return (
     <div
       ref={container}
-      className="fixed inset-0 z-[9999] bg-(--bg-primary) text-(--text-primary)"
+      className="fixed inset-0 z-9999 bg-(--bg-primary) text-(--text-primary)"
     >
       <div className="flex h-full flex-col justify-between px-6 py-6 md:px-10 md:py-8 lg:px-16">
         {/* Top */}
@@ -66,7 +68,7 @@ const LoadingScreen = () => {
         <div className="flex items-center justify-center">
           <span
             ref={counterRef}
-            className="text-[clamp(5rem,11vw,10rem)] font-medium leading-none tracking-[-0.05em]"
+            className="text-[clamp(5rem,11vw,10rem)] font-medium leading-none tracking-tighter"
           >
             01
           </span>

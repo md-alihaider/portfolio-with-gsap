@@ -54,7 +54,7 @@ export const heroData = {
 
   resumeCta: {
     label: "Download Resume",
-    href: "/resume.pdf",
+    href: "/ali-haider-cv-20-august.pdf",
   },
 
   location: "India · 2026",
@@ -352,7 +352,7 @@ export const projectsData = {
     {
       id: 1,
       number: "01",
-      image:"/public/projects/product-store.webp",
+      image: "/projects/product-store.webp",
       featured: true,
       title: "Product Store",
       subtitle: "Full-Stack MERN E-commerce Platform",
@@ -369,7 +369,7 @@ export const projectsData = {
     {
       id: 2,
       number: "02",
-      image:"/public/projects/skymart.webp",
+      image: "/projects/skymart.webp",
       featured: false,
       title: "SkyMart",
       subtitle: "E-commerce Experience",
@@ -387,7 +387,7 @@ export const projectsData = {
     {
       id: 3,
       number: "03",
-      image:"/public/projects/focusflow.webp",
+      image: "/projects/focusflow.webp",
       featured: false,
       title: "FocusFlow",
       subtitle: "Productivity Dashboard",
@@ -405,7 +405,7 @@ export const projectsData = {
     {
       id: 4,
       number: "04",
-      image:"/public/projects/fintrack-pro.webp",
+      image: "/projects/fintrack-pro.webp",
       featured: false,
       title: "FinTrack Pro",
       subtitle: "Personal Finance Tracker",
@@ -420,4 +420,96 @@ export const projectsData = {
       live: "https://my-fintrack-pro.vercel.app/",
     },
   ],
+};
+
+export const contactData = {
+  sectionLabel: "05 / CONTACT",
+
+  heading: "Let's build something great.",
+
+  message: {
+    title: "Have a project in mind?",
+    subtitle: "Let's talk.",
+  },
+
+  email: {
+    label: "EMAIL",
+    value: "alihaiderbgp85@gmail.com",
+    href: "mailto:alihaiderbgp85@gmail.com",
+  },
+
+  links: [
+    {
+      label: "GITHUB",
+      href: "https://github.com/md-alihaider",
+      external: true,
+    },
+    {
+      label: "LINKEDIN",
+      href: "https://www.linkedin.com/in/md-ali-haider/",
+      external: true,
+    },
+  ],
+};
+
+
+export const footerData = {
+  sectionLabel: "06 / FOOTER",
+
+  heading: {
+    line1: "Let's create",
+    line2: "something.",
+  },
+
+  navigation: [
+    {
+      label: "Home",
+      href: "#home",
+    },
+    {
+      label: "About",
+      href: "#about",
+    },
+    {
+      label: "Skills",
+      href: "#skills",
+    },
+    {
+      label: "Projects",
+      href: "#projects",
+    },
+  ],
+
+  connect: [
+    {
+      label: "GitHub",
+      href: "https://github.com/md-alihaider",
+      external: true,
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/md-ali-haider/",
+      external: true,
+    },
+    {
+      label: "Instagram",
+      href: "https://instagram.com/alihaider_7056",
+      external: true,
+    },
+    {
+      label: "Email",
+      href: "mailto:alihaiderbgp85@gmail.com",
+      external: false,
+    },
+  ],
+
+  identity: {
+    initials: "AH",
+    name: "Ali Haider",
+    copyright: "© 2026",
+  },
+
+  builtWith: "Built with React + GSAP",
+
+  backToTop: "TOP",
 };
