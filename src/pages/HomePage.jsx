@@ -23,14 +23,6 @@ const HomePage = () => {
       const cta = root.querySelector(".hero-cta");
       const ctaArrow = root.querySelector(".cta-arrow");
 
-      /*
-       * --------------------------------
-       * Initial Hero State
-       * --------------------------------
-       *
-       * Hide everything immediately while
-       * the loading screen is visible.
-       */
       gsap.set(availability, {
         y: 25,
         opacity: 0,
@@ -55,11 +47,6 @@ const HomePage = () => {
         opacity: 0,
       });
 
-      /*
-       * --------------------------------
-       * Hero Entrance Animation
-       * --------------------------------
-       */
       const playHeroAnimation = () => {
         const tl = gsap.timeline();
 
@@ -109,25 +96,12 @@ const HomePage = () => {
           );
       };
 
-      /*
-       * --------------------------------
-       * Loader → Hero
-       * --------------------------------
-       */
       const handleLoaderComplete = () => {
         playHeroAnimation();
       };
 
-      window.addEventListener(
-        "loaderComplete",
-        handleLoaderComplete,
-      );
+      window.addEventListener("loaderComplete", handleLoaderComplete);
 
-      /*
-       * --------------------------------
-       * Scroll Arrow
-       * --------------------------------
-       */
       if (scrollArrow) {
         gsap.to(scrollArrow, {
           y: 6,
@@ -138,11 +112,6 @@ const HomePage = () => {
         });
       }
 
-      /*
-       * --------------------------------
-       * CTA Hover
-       * --------------------------------
-       */
       const handleEnter = () => {
         if (!ctaArrow) return;
 
@@ -168,16 +137,8 @@ const HomePage = () => {
         cta.addEventListener("mouseleave", handleLeave);
       }
 
-      /*
-       * --------------------------------
-       * Cleanup
-       * --------------------------------
-       */
       return () => {
-        window.removeEventListener(
-          "loaderComplete",
-          handleLoaderComplete,
-        );
+        window.removeEventListener("loaderComplete", handleLoaderComplete);
 
         if (cta) {
           cta.removeEventListener("mouseenter", handleEnter);
@@ -187,7 +148,7 @@ const HomePage = () => {
     },
     {
       scope: container,
-    }
+    },
   );
 
   return (
@@ -244,16 +205,12 @@ const HomePage = () => {
                 text-(--text-primary)
               "
               style={{
-                fontSize: "clamp(3.8rem, 9vw, 9rem)",
+                fontSize: "clamp(3.5rem, 9vw, 9rem)",
               }}
             >
-              <span className="hero-line block">
-                {heroData.heading.line1}
-              </span>
+              <span className="hero-line block">{heroData.heading.line1}</span>
 
-              <span className="hero-line block">
-                {heroData.heading.line2}
-              </span>
+              <span className="hero-line block">{heroData.heading.line2}</span>
 
               <span className="hero-line block">
                 {heroData.heading.line3}
