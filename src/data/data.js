@@ -339,3 +339,85 @@ export const skillsData = {
     },
   ],
 };
+
+export const projectsData = {
+  sectionLabel: "04 / PROJECTS",
+
+  heading: "Selected work.",
+
+  description:
+    "A collection of things I've built, experimented with, and shipped.",
+
+  projects: [
+    {
+      id: 1,
+      number: "01",
+      image:"/public/projects/product-store.webp",
+      featured: true,
+      title: "Product Store",
+      subtitle: "Full-Stack MERN E-commerce Platform",
+      description:
+        "A full-stack e-commerce application built with the MERN stack, covering both the frontend and backend experience.",
+
+      technologies: ["React", "Node.js", "Express", "MongoDB"],
+
+      github: "https://github.com/md-alihaider/product-store",
+
+      live: "https://product-store-w5dq.onrender.com/",
+    },
+
+    {
+      id: 2,
+      number: "02",
+      image:"/public/projects/skymart.webp",
+      featured: false,
+      title: "SkyMart",
+      subtitle: "E-commerce Experience",
+      description:
+        "A modern e-commerce interface focused on creating a clean and engaging online shopping experience.",
+
+      technologies: ["React", "JavaScript", "Tailwind CSS"],
+
+      github:
+        "https://github.com/md-alihaider/cohort-3/tree/main/Projects/SkyMart-Ecommerce",
+
+      live: "https://shop-skymart.vercel.app/",
+    },
+
+    {
+      id: 3,
+      number: "03",
+      image:"/public/projects/focusflow.webp",
+      featured: false,
+      title: "FocusFlow",
+      subtitle: "Productivity Dashboard",
+      description:
+        "A productivity dashboard designed to help users organize their tasks, focus on priorities, and manage their daily workflow.",
+
+      technologies: ["HTML", "CSS", "JavaScript"],
+
+      github:
+        "https://github.com/md-alihaider/cohort-3/tree/main/Projects/FocusFlow",
+
+      live: "https://focusflow-productivity.vercel.app/",
+    },
+
+    {
+      id: 4,
+      number: "04",
+      image:"/public/projects/fintrack-pro.webp",
+      featured: false,
+      title: "FinTrack Pro",
+      subtitle: "Personal Finance Tracker",
+      description:
+        "A personal finance tracker designed to help users organize and keep track of their financial activity.",
+
+      technologies: ["HTML", "CSS", "JavaScript"],
+
+      github:
+        "https://github.com/md-alihaider/cohort-3/tree/main/Projects/FinTrack%20Pro",
+
+      live: "https://my-fintrack-pro.vercel.app/",
+    },
+  ],
+};
