@@ -1,10 +1,64 @@
-import { useState } from "react";
+import { useRef,useEffect, useState } from "react";
 import { Menu, X, Mail } from "lucide-react";
 import { navigation, personalInfo } from "../../data/data";
+import gsap from "gsap";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navbarRef = useRef(null);
+  useEffect(() => {
+    const navbar = navbarRef.current;
 
+    if (!navbar) return;
+
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const difference = currentScrollY - lastScrollY;
+
+      // Always show navbar at the top
+      if (currentScrollY <= 80) {
+        gsap.to(navbar, {
+          yPercent: 0,
+          duration: 0.35,
+          ease: "power3.out",
+        });
+
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      // Ignore tiny scroll movements
+      if (Math.abs(difference) < 5) return;
+
+      if (difference > 0) {
+        // Scrolling down → hide
+        gsap.to(navbar, {
+          yPercent: -150,
+          duration: 0.35,
+          ease: "power3.out",
+          overwrite: true,
+        });
+      } else {
+        // Scrolling up → show
+        gsap.to(navbar, {
+          yPercent: 0,
+          duration: 0.35,
+          ease: "power3.out",
+          overwrite: true,
+        });
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const handleNavClick = () => {
     setMenuOpen(false);
   };
@@ -58,7 +112,8 @@ const Navbar = () => {
           NAVIGATION
       ======================================== */}
 
-      <nav
+      <nav 
+        ref={navbarRef}
         className="
           rounded-full
           border
