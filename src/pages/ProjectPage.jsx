@@ -185,7 +185,7 @@ const ProjectPage = () => {
           })}
         </div>
       </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 h-64 w-full bg-linear-to-b from-(--bg-primary) to-transparent" />
+      
     </section>
   );
 };
