@@ -66,7 +66,7 @@ export const heroData = {
 };
 // src/data/data.js
 
-import aboutImage from "../assets/Aboutme.jpg";
+import aboutImage from "../assets/Portrait-of-mine-for-dp (2).png";
 
 export const aboutData = {
   sectionNumber: "01",
