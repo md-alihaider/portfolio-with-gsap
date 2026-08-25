@@ -352,8 +352,34 @@ export const projectsData = {
     {
       id: 1,
       number: "01",
-      image: "/projects/product-store.webp",
+      image: "/projects/syncchat.webp",
       featured: true,
+      title: "SyncChat",
+      subtitle: "Full-Stack Real-Time Chat Application",
+      description:
+        "A full-stack real-time chat application with user authentication, protected routes, conversations, messaging, and a responsive chat interface.",
+
+      technologies: [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Mongoose",
+        "Socket.IO",
+        "Zustand",
+        "JWT",
+      ],
+
+      github: "https://github.com/md-alihaider/SyncChat",
+
+      live: "https://syncchat-mnrj.onrender.com/",
+    },
+
+    {
+      id: 2,
+      number: "02",
+      image: "/projects/product-store.webp",
+      featured: false,
       title: "Product Store",
       subtitle: "Full-Stack MERN E-commerce Platform",
       description:
@@ -367,8 +393,8 @@ export const projectsData = {
     },
 
     {
-      id: 2,
-      number: "02",
+      id: 3,
+      number: "03",
       image: "/projects/skymart.webp",
       featured: false,
       title: "SkyMart",
@@ -385,8 +411,8 @@ export const projectsData = {
     },
 
     {
-      id: 3,
-      number: "03",
+      id: 4,
+      number: "04",
       image: "/projects/focusflow.webp",
       featured: false,
       title: "FocusFlow",
@@ -403,8 +429,8 @@ export const projectsData = {
     },
 
     {
-      id: 4,
-      number: "04",
+      id: 5,
+      number: "05",
       image: "/projects/fintrack-pro.webp",
       featured: false,
       title: "FinTrack Pro",
