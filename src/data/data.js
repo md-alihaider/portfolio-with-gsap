@@ -445,6 +445,30 @@ export const projectsData = {
 
       live: "https://my-fintrack-pro.vercel.app/",
     },
+    {
+      id: 6,
+      number: "06",
+      image: "/projects/thinkboard.webp",
+      featured: false,
+      title: "ThinkBoard",
+      subtitle: "Full-Stack Note-Taking Application",
+      description:
+        "A full-stack note-taking application that allows users to create, view, update, and delete notes through a clean and responsive interface.",
+      technologies: [
+        "React",
+        "Vite",
+        "Tailwind CSS",
+        "DaisyUI",
+        "Axios",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Mongoose",
+        "Upstash Redis",
+      ],
+      github: "https://github.com/md-alihaider/ThinkBoard",
+      live: "https://thinkboard-asjm.onrender.com/",
+    },
   ],
 };
 
